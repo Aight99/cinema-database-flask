@@ -6,4 +6,4 @@
 
 Модель базы данных:
 
-![db_model](https://vk.com/s/v1/doc/vP_lCUbPxassmfeje8_YmLsTfW26rQ98AtCua2DB8a7ImQvwMvg)
+![db_model](https://user-images.githubusercontent.com/58304011/197353668-fd0d9909-0a51-43d6-bdd1-a2eb780ae8e9.png)
