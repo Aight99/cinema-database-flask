@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> Мой список </title>
+    <link rel="stylesheet" href=../static/films_styles.css>
+    {% import "macros.html" as macros %}
+</head>
+<body>
+
+<div class="main">
+    <div class="cards">
+    {% for i in range(len(movies)) %}
+    {{ macros.render_movie(movies.loc[i], notna) }}
+    {% endfor %}
+    </div>
+</div>
+
+<br>
+<br>
+</body>
+</html>

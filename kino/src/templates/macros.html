@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+{% macro render_movie(movie, notna) %}
+<div class="card card-picture"
+     style="background:
+     radial-gradient(circle at 20%, rgba(51, 51, 51, 1), rgba(51, 51, 51, 0.97) 50%, rgba(255, 147, 26, 0) 100%),
+     url({{movie['movie_poster_url']}});
+     background-position: -60% 15%;">
+
+    <h2 class="card_title">{{ movie['movie_name'] }}</h2>
+
+    {% set nan = "nan" %}
+    <div class="card_description">
+        {% if notna(movie['user_list_movie_rating']) %}
+        <p>{{ movie['user_list_movie_rating'] }}</p>
+        {% endif %}
+        {% if notna(movie['status_name']) %}
+        <p>{{ movie['status_name'] }}</p>
+        {% endif %}
+    </div>
+
+    <p class="card_apply">
+        <a class="card_link" href="#">Edit review<i class="fas fa-arrow-right"></i></a>
+    </p>
+
+</div>
+{% endmacro %}
