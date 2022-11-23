@@ -45,7 +45,8 @@ def get_user_list(conn, username):
              user_login,
              user_list_movie_rating,
              status_name,
-             movie_poster_url
+             movie_poster_url,
+             list.movie_id
          FROM
              user
              JOIN user_list_movie list ON user.user_id = list.user_id

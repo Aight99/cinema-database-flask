@@ -14,18 +14,11 @@ body {
 }
 
 html {
-    background:
-    linear-gradient(#b9b9b9, transparent),
-    linear-gradient(to top left, #242424, transparent),
-    linear-gradient(to top right, black, transparent);
-    background-blend-mode: screen;
-}
-
-.named_checkboxes {
-    border-radius: 10px;
-    background: radial-gradient(circle at 35%, #333, #333 50%, #444444 100%, #333 1%);
-    width: 250px;
-    min-height: 200px;
+    /*background:*/
+    /*linear-gradient(#b9b9b9, transparent),*/
+    /*linear-gradient(to top left, #242424, transparent),*/
+    /*linear-gradient(to top right, black, transparent);*/
+    /*background-blend-mode: screen;*/
 }
 
 span {
@@ -41,23 +34,21 @@ span {
 }
 
 .card {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    padding: 20px 50px;
-    width: 350px;
-    height: 250px;
-    display: grid;
-    grid-template-rows: 20px 50px 1fr 50px;
+    width: 300px;
+    height: 445px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
     border-radius: 10px;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
     transition: all 0.2s;
-    background-position: -60% 50%;
 }
 
 .card:hover {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-    transform: scale(1.01);
+    transform: scale(1.04);
 }
 
 .card_link {
@@ -82,103 +73,26 @@ span {
 }
 
 .card_title {
-    grid-row: 1/4;
     font-size: 32px;
-    align-self: center;
-    /*padding: 20px;*/
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
     color: white;
-    width: 63%;
     word-break: break-word;
 }
 
 .card_description {
     display: flex;
-    grid-row: 4/5;
     font-weight: 400;
     color: #ffffff;
-    width: 50%;
     word-break: break-word;
 }
 
 .card_apply {
-    grid-row: 5/6;
     align-self: center;
     font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 30px;
 }
-
-/* CARD BACKGROUNDS */
-
-.card-picture {
-    /*background: radial-gradient(circle at 35%, #333, #333 50%, rgba(255, 147, 26, 0) 100%, #333 1%), url("https://m.media-amazon.com/images/M/MV5BYTdiOTIyZTQtNmQ1OS00NjZlLWIyMTgtYzk5Y2M3ZDVmMDk1XkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_SX300.jpg");*/
-    background-position: 10% 100%;
-}
-
-.card-orange {
-    background: radial-gradient(circle at 35%, #333, #333 50%, #ff931a 100%, #333 1%);
-}
-
-.card-purple {
-    background: radial-gradient(circle at 35%, #333, #333 50%, #671ec0 100%, #333 1%);
-}
-
-p {
-    margin: 5px;
-}
-
-/* OLD */
-
-h1 {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.col_name {
-    color: #bdbdbd;
-    font-weight: bold;
-}
-
-.tables {
-    display: flex;
-    margin: 10px;
-    align-items: flex-start;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.named_table {
-    display: flex;
-    margin: 10px;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-}
-
-table {
-    width: 250px;
-    min-height: 200px;
-    /*border: 1px solid rgba(23, 23, 23, 0.37);*/
-    table-layout: fixed;
-    margin: 1px;
-    padding: 10px;
-}
-
-table th {
-    font-weight: bold;
-    padding: 5px;
-    /*border: 1px solid rgba(23, 23, 23, 0.37);*/
-}
-
-table td {
-    padding: 5px 10px;
-    /*border: 1px solid rgba(23, 23, 23, 0.37);*/
-    text-align: left;
-}
-
-/*table tbody tr:nth-child(odd) {*/
-/*    background: #fff;*/
-/*}*/
-
-/*table tbody tr:nth-child(even) {*/
-/*    background: #F7F7F7;*/
-/*}*/

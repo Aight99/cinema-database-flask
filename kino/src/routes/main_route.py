@@ -10,7 +10,7 @@ main = Blueprint('main', __name__)
 def main_page():
     conn = get_db_connection()
 
-    username = 'userman'
+    username = 'qwerty'
     movies = get_user_list(conn, username)
 
     html = render_template(
