@@ -5,7 +5,8 @@ body {
 
 .main {
     margin-top: 55px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
 }
 
@@ -16,12 +17,6 @@ body {
 }
 
 /* CARDS */
-
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
 
 .card {
     width: 300px;
@@ -76,9 +71,15 @@ body {
 
 .card_description {
     display: flex;
+    align-self: center;
     font-weight: 400;
     color: #ffffff;
     word-break: break-word;
+    flex-direction: column;
+}
+
+.card_description p {
+    align-self: center;
 }
 
 .card_apply {

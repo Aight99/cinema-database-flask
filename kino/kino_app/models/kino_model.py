@@ -75,3 +75,17 @@ def get_movie_reviews(conn, film):
         ''', conn)
 
 
+def get_movie(conn, movie_id):
+    return pd.read_sql(f'''
+         SELECT
+             movie_name,
+             movie_release_year,
+             movie_description,
+             movie_poster_url
+         FROM
+             movie
+         WHERE
+             movie.movie_id = '{movie_id}'
+        ''', conn)
+
+

@@ -25,7 +25,7 @@
         }
     </style>
 
-    <div id="m{{ movie['movie_id'] }}" class="card card-picture">
+    <div id="m{{ movie['movie_id'] }}" class="card card-picture cursor-pointer" onclick="goToMovie({{ movie['movie_id'] }})">
         <div class="hidden_info">
             <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
                 {{ movie['movie_name'] }}

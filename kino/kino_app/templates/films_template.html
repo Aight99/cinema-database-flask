@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}  Мой список {% endblock %}
+{% block title %} Gallery {% endblock %}
 
 {% block main %}
-    <div class="cards">
+    <div class="flex flex-wrap justify-around">
         {% for i in range(len(movies)) %}
             {{ macros.render_movie(movies.loc[i], notna) }}
         {% endfor %}

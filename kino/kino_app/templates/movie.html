@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %} {{ movie['movie_name'] }} {% endblock %}
+
+{% block main %}
+    <img src="{{movie['movie_poster_url']}}" alt="{{ movie['movie_name'] }}">
+{% endblock %}
