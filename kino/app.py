@@ -1,4 +1,4 @@
-from src import create_app
+from kino_app import create_app
 
 app = create_app()
 

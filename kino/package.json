@@ -1,0 +1,15 @@
+{
+  "name": "kino",
+  "version": "1.0.0",
+  "description": "idk trash",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tailwindcss -i kino_app/static/style.css -o kino_app/static/css/main.css"
+  },
+  "author": "Alexander Ilchenko",
+  "license": "ISC",
+  "dependencies": {
+    "daisyui": "^2.42.1",
+    "tailwindcss": "^3.2.4"
+  }
+}

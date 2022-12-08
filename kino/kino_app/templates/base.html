@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="halloween">
+<head>
+    <title> {% block title %} Название {% endblock %} </title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
+    <link rel="stylesheet" href=../static/css/films_styles.css>
+    {% import "macros.html" as macros %}
+</head>
+<body class="bg-base-300">
+
+<script type="text/javascript">
+    let prevScrollPosition = window.scrollY;
+
+    window.onscroll = function () {
+        let currentScrollPosition = window.scrollY;
+        if (prevScrollPosition > currentScrollPosition) {
+            document.getElementById("navbar").style.top = "0";
+        } else {
+            document.getElementById("navbar").style.top = "-80px";
+        }
+        prevScrollPosition = currentScrollPosition;
+    }
+</script>
+
+<div id="navbar" class="transition-transform navbar fixed top-0 z-50 bg-base-100 md:px-20">
+  <div class="navbar-start">
+    <a class="btn btn-ghost normal-case text-xl px-10">
+        Kino
+    </a>
+  </div>
+  <div class="navbar-center flex">
+    <ul class="menu menu-horizontal p-0">
+      <li><a>Search</a></li>
+      <li tabindex="0">
+        <a>
+          My List
+          <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
+        </a>
+        <ul class="p-2 z-50">
+            <li><a>Reviews</a></li>
+            <li><a>Plan to watch</a></li>
+            <li><a>Completed</a></li>
+        </ul>
+      </li>
+      <li><a>Rating</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a class="btn btn-outline btn-primary">Log in</a>
+  </div>
+</div>
+
+<div class="main">
+    {% block main %}
+    {% endblock %}
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>
