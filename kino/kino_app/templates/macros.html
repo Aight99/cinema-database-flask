@@ -33,10 +33,10 @@
 
             {% set nan = "nan" %}
             <div class="card_description">
-                {% if notna(movie['status_name']) %}
+                {% if 'status_name' in movie.columns and notna(movie['status_name']) %}
                     <p>{{ movie['status_name'] }}
                 {% endif %}
-                {% if notna(movie['user_list_movie_rating']) %}
+                {% if 'user_list_movie_rating' in movie.columns and notna(movie['user_list_movie_rating']) %}
                     {{ movie['user_list_movie_rating'] }}  </p>
                 {% endif %}
             </div>
