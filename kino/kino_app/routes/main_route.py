@@ -1,7 +1,7 @@
 import pandas as pd
 from flask import Blueprint, render_template
 from utils import get_db_connection
-from kino_app.models.kino_model import get_user_list, get_movie
+from kino_app.models.kino_model import get_user_list, get_movie, get_all_movies
 
 main = Blueprint('main', __name__)
 
@@ -27,8 +27,7 @@ def main_page():
 def gallery():
     conn = get_db_connection()
 
-    username = 'qwerty'
-    movies = get_user_list(conn, username)
+    movies = get_all_movies(conn)
 
     html = render_template(
         'films_template.html',

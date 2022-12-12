@@ -3,5 +3,36 @@
 {% block title %} {{ movie['movie_name'] }} {% endblock %}
 
 {% block main %}
-    <img src="{{movie['movie_poster_url']}}" alt="{{ movie['movie_name'] }}">
+    <div class="w-full flex justify-center pt-5">
+        <div class="flex flex-row max-w-3xl">
+            <img class="rounded-xl shadow-lg mx-3" src="{{ movie['movie_poster_url'] }}" alt="{{ movie['movie_name'] }}">
+            <div class="flex flex-col px-5">
+                <div class="mb-5">
+                    <h1 class="font-extrabold text-5xl mb-2">{{ movie['movie_name'] }}</h1>
+                    <h2 class="font-bold text-xl">
+                        ({{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }})</h2>
+                </div>
+                <p class="mb-5">{{ movie['movie_description'] }}</p>
+                <div class="grid grid-cols-4 gap-2">
+
+                    <p class="font-bold">Duration</p>
+                    {% set hours = movie['movie_duration_minutes'] //  60 %}
+                    {% if hours > 0 %}
+                        <p class="col-span-3">{{ hours }}h {{ movie['movie_duration_minutes'] % 60 }}m</p>
+                    {% else %}
+                        <p class="col-span-3">{{ movie['movie_duration_minutes'] % 60 }}m</p>
+                    {% endif %}
+
+                    <p class="font-bold">Title</p>
+                    <p class="col-span-3">{{ movie['movie_name'] }}</p>
+                    <p class="font-bold">Title</p>
+                    <p class="col-span-3">{{ movie['movie_name'] }}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

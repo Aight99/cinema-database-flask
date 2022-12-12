@@ -59,6 +59,20 @@ def get_user_list(conn, username):
         ''', conn)
 
 
+def get_all_movies(conn):
+    return pd.read_sql(f'''
+         SELECT
+             movie_name,
+             movie_poster_url,
+             movie_release_year,
+             movie_id
+         FROM
+             movie
+        ORDER BY 
+            movie_release_year DESC 
+        ''', conn)
+
+
 def get_movie_reviews(conn, film):
     return pd.read_sql(f'''
          SELECT
@@ -81,9 +95,12 @@ def get_movie(conn, movie_id):
              movie_name,
              movie_release_year,
              movie_description,
-             movie_poster_url
+             movie_poster_url,
+             movie_type_name,
+             movie_duration_minutes
          FROM
              movie
+             JOIN movie_type mt on movie.movie_type_id = mt.movie_type_id
          WHERE
              movie.movie_id = '{movie_id}'
         ''', conn)
