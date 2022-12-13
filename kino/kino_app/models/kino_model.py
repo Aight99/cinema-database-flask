@@ -46,12 +46,15 @@ def get_user_list(conn, username):
              user_list_movie_rating,
              status_name,
              movie_poster_url,
+             movie_release_year,
+             movie_type_name,
              list.movie_id
          FROM
              user
              JOIN user_list_movie list ON user.user_id = list.user_id
              JOIN movie ON list.movie_id = movie.movie_id
              JOIN user_status ON list.status_id = user_status.status_id
+             JOIN movie_type mt on movie.movie_type_id = mt.movie_type_id
          WHERE
              user.user_login = '{username}'
          ORDER BY
@@ -65,9 +68,11 @@ def get_all_movies(conn):
              movie_name,
              movie_poster_url,
              movie_release_year,
-             movie_id
+             movie_id,
+             movie_type_name
          FROM
              movie
+             JOIN movie_type mt on movie.movie_type_id = mt.movie_type_id
         ORDER BY 
             movie_release_year DESC 
         ''', conn)

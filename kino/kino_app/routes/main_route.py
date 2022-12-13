@@ -30,7 +30,7 @@ def gallery():
     movies = get_all_movies(conn)
 
     html = render_template(
-        'films_template.html',
+        'gallery.html',
         movies=movies,
         len=len,
         range=range,

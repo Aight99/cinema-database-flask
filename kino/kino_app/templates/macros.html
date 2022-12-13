@@ -30,13 +30,13 @@
             <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
                 {{ movie['movie_name'] }}
             </h2>
+            <h2 class="font-bold text-lg">{{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }}</h2>
 
-            {% set nan = "nan" %}
             <div class="card_description">
-                {% if 'status_name' in movie.columns and notna(movie['status_name']) %}
+                {% if 'status_name' in movie.index and notna(movie['status_name']) %}
                     <p>{{ movie['status_name'] }}
                 {% endif %}
-                {% if 'user_list_movie_rating' in movie.columns and notna(movie['user_list_movie_rating']) %}
+                {% if 'user_list_movie_rating' in movie.index and notna(movie['user_list_movie_rating']) %}
                     {{ movie['user_list_movie_rating'] }}  </p>
                 {% endif %}
             </div>

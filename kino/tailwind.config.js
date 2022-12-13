@@ -28,4 +28,9 @@ module.exports = {
   daisyui: {
     themes: ["bumblebee", "halloween", "luxury"],
   },
+  safelist: [
+    {
+      pattern: /.*/
+    }
+  ],
 }
