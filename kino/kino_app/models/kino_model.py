@@ -102,7 +102,8 @@ def get_movie(conn, movie_id):
              movie_description,
              movie_poster_url,
              movie_type_name,
-             movie_duration_minutes
+             movie_duration_minutes,
+             movie_rating
          FROM
              movie
              JOIN movie_type mt on movie.movie_type_id = mt.movie_type_id
@@ -111,3 +112,29 @@ def get_movie(conn, movie_id):
         ''', conn)
 
 
+def get_movie_crew(conn, movie_id):
+    return pd.read_sql(f'''
+         SELECT
+             person_name,
+             crew_role_name,
+             p.person_id
+         FROM
+             crew_member
+             JOIN crew_role cr on cr.crew_role_id = crew_member.crew_role_id
+             JOIN person p on p.person_id = crew_member.person_id
+         WHERE
+             crew_member.movie_id = '{movie_id}'
+        ''', conn)
+
+
+def get_movie_genres(conn, movie_id):
+    return pd.read_sql(f'''
+         SELECT
+             g.genre_id,
+             genre_name
+         FROM
+             movie_genre
+             JOIN genre g on movie_genre.genre_id = g.genre_id
+         WHERE
+             movie_id = '{movie_id}'
+        ''', conn)

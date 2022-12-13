@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="halloween">
+<html lang="en" data-theme="halloween" class="bg-base-300">
 <head>
     <title> {% block title %} Название {% endblock %} </title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
     <link rel="stylesheet" href=../static/css/films_styles.css>
     {% import "macros.html" as macros %}
 </head>
-<body class="bg-base-300">
+<body>
 
 <script type="text/javascript">
     let prevScrollPosition = window.scrollY;

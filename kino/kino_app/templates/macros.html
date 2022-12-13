@@ -25,7 +25,8 @@
         }
     </style>
 
-    <div id="m{{ movie['movie_id'] }}" class="card card-picture cursor-pointer" onclick="goToMovie({{ movie['movie_id'] }})">
+    <div id="m{{ movie['movie_id'] }}" class="card card-picture cursor-pointer"
+         onclick="goToMovie({{ movie['movie_id'] }})">
         <div class="hidden_info">
             <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
                 {{ movie['movie_name'] }}
@@ -45,5 +46,50 @@
                 <a class="card_link" href="#">Edit review<i class="fas fa-arrow-right"></i></a>
             </p>
         </div>
+    </div>
+{% endmacro %}
+
+{% macro render_disable_rating(star) %}
+    <div class="rating rating-md rating-half mb-5">
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 1 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 2 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 3 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 4 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 5 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 6 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 7 %}
+               checked
+                {% endif %}>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 8 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 9 %}
+               checked
+                {% endif %}/>
+        <input disabled type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 10 %}
+               checked
+                {% endif %}/>
     </div>
 {% endmacro %}

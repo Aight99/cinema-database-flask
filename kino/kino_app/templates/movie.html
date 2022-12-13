@@ -5,7 +5,7 @@
 {% block main %}
     <div class="w-full flex justify-center pt-5">
         <div class="flex flex-row max-w-3xl">
-            <img class="rounded-xl shadow-lg mx-3" src="{{ movie['movie_poster_url'] }}"
+            <img class="rounded-xl shadow-lg mx-3 self-start" src="{{ movie['movie_poster_url'] }}"
                  alt="{{ movie['movie_name'] }}">
             <div class="flex flex-col px-5">
                 <div class="mb-5">
@@ -13,7 +13,13 @@
                     <h2 class="font-bold text-xl">
                         ({{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }})</h2>
                 </div>
+                {% if notna(movie['movie_rating']) %}
+                    {{ macros.render_disable_rating(movie['movie_rating'] // 1) }}
+                {% endif %}
+
                 <p class="mb-5">{{ movie['movie_description'] }}</p>
+
+
                 <div class="grid grid-cols-4 gap-2">
 
                     <p class="font-bold">Duration</p>
@@ -24,10 +30,28 @@
                         <p class="col-span-3">{{ movie['movie_duration_minutes'] % 60 }}m</p>
                     {% endif %}
 
-                    <p class="font-bold">Title</p>
-                    <p class="col-span-3">{{ movie['movie_name'] }}</p>
-                    <p class="font-bold">Title</p>
-                    <p class="col-span-3">{{ movie['movie_name'] }}</p>
+                    <p class="font-bold">Genres</p>
+                    <p class="col-span-3">
+                        {% set genre_count = len(genres) %}
+                        {% for i in range(genre_count - 1) %}
+                            <a> {{ genres.loc[i]['genre_name'] }}</a>,
+                        {% endfor %}
+                        <a>
+                            {{ genres.loc[genre_count - 1]['genre_name'] }}
+                        </a>
+                    </p>
+                    {% for crew_role in crew %}
+                        <p class="font-bold">{{ crew_role }}</p>
+                        <p class="col-span-3">
+                            {% set role_count = len(crew[crew_role]) %}
+                            {% for i in range(role_count - 1) %}
+                                <a> {{ crew[crew_role][i][1] }}</a>,
+                            {% endfor %}
+                            <a>
+                                {{ crew[crew_role][role_count - 1][1] }}
+                            </a>
+                        </p>
+                    {% endfor %}
 
                 </div>
 
