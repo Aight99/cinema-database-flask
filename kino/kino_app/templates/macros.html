@@ -4,7 +4,7 @@
 
     <style>
         #m{{ movie['movie_id'] }} {
-            background: url({{movie['movie_poster_url']}}) -60% 15%;
+            background: url({{movie['movie_poster_url']}});
         }
 
         #m{{ movie['movie_id'] }}:hover {
@@ -13,7 +13,7 @@
                     rgb(12, 12, 12),
                     rgba(14, 14, 14, 0.97) 50%,
                     rgba(12, 12, 12, 0) 100%),
-            url({{movie['movie_poster_url']}}) -60% 15%;
+            url({{movie['movie_poster_url']}});
         }
 
         #m{{ movie['movie_id'] }} .hidden_info {
@@ -48,6 +48,54 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro render_small_movie(movie, notna) %}
+
+    <style>
+        #s{{ movie['movie_id'] }} {
+            background: url({{movie['movie_poster_url']}}) -60% 25%;
+        }
+
+        #s{{ movie['movie_id'] }}:hover {
+            background: radial-gradient(
+                    circle at 50% 120%,
+                    rgb(12, 12, 12),
+                    rgba(14, 14, 14, 0.7) 100%,
+                    rgba(12, 12, 12, 0) 100%),
+            url({{movie['movie_poster_url']}}) -60% 25%;
+        }
+
+        #s{{ movie['movie_id'] }} .hidden_info {
+            display: none;
+        }
+
+        #s{{ movie['movie_id'] }}:hover .hidden_info {
+            display: contents;
+        }
+    </style>
+
+    <div id="s{{ movie['movie_id'] }}" class="card-small card-picture cursor-pointer"
+         onclick="goToMovie({{ movie['movie_id'] }})">
+        <div class="hidden_info">
+            <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
+                {{ movie['movie_name'] }}
+            </h2>
+
+            {#            card_description #}
+            <p class="card_apply">
+                <a class="card_link" href="#">
+                    {% if 'status_name' in movie.index and notna(movie['status_name']) %}
+                        {{ movie['status_name'] }}
+                    {% endif %}
+                    {% if 'user_list_movie_rating' in movie.index and notna(movie['user_list_movie_rating']) %}
+                        {{ movie['user_list_movie_rating'] }}
+                    {% endif %}
+                    <i class="fas fa-arrow-right"></i></a>
+            </p>
+        </div>
+    </div>
+{% endmacro %}
+
 
 {% macro render_disable_rating(star) %}
     <div class="rating rating-md rating-half mb-5">
