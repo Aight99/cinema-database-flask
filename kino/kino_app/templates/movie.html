@@ -3,8 +3,8 @@
 {% block title %} {{ movie['movie_name'] }} {% endblock %}
 
 {% block main %}
-    <div class="w-full flex justify-center pt-5">
-        <div class="flex flex-row max-w-3xl">
+    <div class="w-full flex justify-center pt-5 flex-col">
+        <div class="flex flex-row self-center max-w-3xl mb-16">
             <img class="rounded-xl shadow-lg mx-3 self-start" src="{{ movie['movie_poster_url'] }}"
                  alt="{{ movie['movie_name'] }}">
             <div class="flex flex-col px-5">
@@ -56,6 +56,15 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="divider font-bold text-2xl px-10">Latest reviews</div>
+        <div class="carousel py-3 w-full">
+            {% for i in range(1, 6) %}
+                <div class="carousel-item mx-2" >
+                    {{ macros.render_review_card("Я отзыв " + "я отзыв я отзыв " * i) }}
+                </div>
+            {% endfor %}
         </div>
     </div>
 

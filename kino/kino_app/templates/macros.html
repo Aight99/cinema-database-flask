@@ -25,7 +25,7 @@
         }
     </style>
 
-    <div id="m{{ movie['movie_id'] }}" class="card card-picture cursor-pointer"
+    <div id="m{{ movie['movie_id'] }}" class="my-card card-picture cursor-pointer"
          onclick="goToMovie({{ movie['movie_id'] }})">
         <div class="hidden_info">
             <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
@@ -139,5 +139,18 @@
                 {% if star == 10 %}
                checked
                 {% endif %}/>
+    </div>
+{% endmacro %}
+
+{% macro render_review_card(text) %}
+    <div class="card card-side bg-base-100 shadow-xl w-[32rem] h-72">
+        <figure class="h-72 w-full"><img class="h-72" src="https://m.media-amazon.com/images/M/MV5BYmU5OWM5ZTAtNjUzOC00NmUyLTgyOWMtMjlkNjdlMDAzMzU1XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg" alt="Movie"/></figure>
+        <div class="card-body">
+            <h2 class="card-title">Я отзыв</h2>
+            <p>{{ text }}</p>
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">К отзыву</button>
+            </div>
+        </div>
     </div>
 {% endmacro %}

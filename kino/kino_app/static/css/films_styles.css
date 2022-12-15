@@ -32,7 +32,7 @@ body {
     margin-bottom: 10px;
 }
 
-.card {
+.my-card {
     width: 300px;
     height: 445px;
     display: flex;
@@ -46,7 +46,7 @@ body {
     margin-bottom: 10px;
 }
 
-.card:hover {
+.my-card:hover {
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
     /*transform: scale(1.04);*/
 }
