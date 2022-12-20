@@ -8,24 +8,6 @@
 </head>
 <body>
 
-<script type="text/javascript">
-    let prevScrollPosition = window.scrollY;
-
-    window.onscroll = function () {
-        let currentScrollPosition = window.scrollY;
-        if (prevScrollPosition > currentScrollPosition) {
-            document.getElementById("navbar").style.top = "0";
-        } else {
-            document.getElementById("navbar").style.top = "-80px";
-        }
-        prevScrollPosition = currentScrollPosition;
-    }
-
-    function goToMovie(movie_id) {
-        location.href = "/movie/" + movie_id;
-    }
-</script>
-
 <div id="navbar" class="transition-transform navbar fixed top-0 z-50 bg-base-100 md:px-20">
   <div class="navbar-start">
     <a class="btn btn-ghost normal-case text-xl px-10" href={{ url_for("main.main_page") }}>
@@ -55,4 +37,5 @@
 <br>
 <br>
 </body>
+    <script src="../static/scripts.js"></script>
 </html>

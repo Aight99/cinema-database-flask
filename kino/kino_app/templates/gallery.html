@@ -3,7 +3,7 @@
 {% block title %} Gallery {% endblock %}
 
 {% block main %}
-    <div class="flex flex-wrap justify-around">
+    <div class="flex flex-wrap justify-around pt-4">
         {% for i in range(len(movies)) %}
             {{ macros.render_movie(movies.loc[i], notna) }}
         {% endfor %}
