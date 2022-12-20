@@ -2,28 +2,28 @@
 <html lang="en" data-theme="halloween" class="bg-base-300">
 <head>
     <title> {% block title %} Название {% endblock %} </title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/main.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}"/>
     <link rel="stylesheet" href=../static/css/films_styles.css>
     {% import "macros.html" as macros %}
 </head>
 <body>
 
 <div id="navbar" class="transition-transform navbar fixed top-0 z-50 bg-base-100 md:px-20">
-  <div class="navbar-start">
-    <a class="btn btn-ghost normal-case text-xl px-10" href={{ url_for("main.main_page") }}>
-        KiYES
-    </a>
-  </div>
-  <div class="navbar-center flex">
-    <ul class="menu menu-horizontal p-0">
-      <li><a href={{ url_for("main.gallery") }}>Search</a></li>
-      <li><a> My List </a></li>
-      <li><a>Rating</a></li>
-    </ul>
-  </div>
-  <div class="navbar-end">
-    <a class="btn btn-outline btn-primary min-h-0 h-9">Log in</a>
-  </div>
+    <div class="navbar-start">
+        <a class="btn btn-ghost normal-case text-xl px-10" href={{ url_for("main.main_page") }}>
+            KiYES
+        </a>
+    </div>
+    <div class="navbar-center flex">
+        <ul class="menu menu-horizontal p-0">
+            <li><a href={{ url_for("main.gallery") }}>Search</a></li>
+            <li><a> My List </a></li>
+            <li><a>Rating</a></li>
+        </ul>
+    </div>
+    <div class="navbar-end">
+        <a id="login" class="btn btn-outline btn-primary min-h-0 h-9">Log in</a>
+    </div>
 </div>
 
 <div class="main">
@@ -31,11 +31,31 @@
     {% endblock %}
 </div>
 
+<dialog class="popup rounded-2xl" id="login-popup">
+    <div class="w-full h-full p-0" id="popup-body">
+        <form class="flex flex-col max-w-4xl max-h-96 mx-24" method="get">
+            <div class="normal-case text-xl text-center mt-16">Login</div>
+            <div class="flex flex-col gap-4 my-7">
+
+                <label>
+                    <input class="input input-bordered input-primary w-64" type="text" placeholder="Username..."/>
+                </label>
+                <label>
+                    <input class="input input-bordered input-primary w-64" type="password" placeholder="Password..."/>
+                </label>
+            </div>
+
+            <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>
+        </form>
+    </div>
+
+</dialog>
+
 <br>
 <br>
 <br>
 <br>
 <br>
 </body>
-    <script src="../static/scripts.js"></script>
+<script src="../static/scripts.js"></script>
 </html>

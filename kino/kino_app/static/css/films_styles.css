@@ -16,6 +16,16 @@ body {
     transition: top 0.3s; /* Transition effect when sliding down (and up) */
 }
 
+/* POPUP MODALS */
+
+.popup {
+    transition: all 0.4s; /* Transition effect when sliding down (and up) */
+}
+
+.popup::backdrop {
+  background: rgb(0 0 0 / 0.4);
+}
+
 /* CARDS */
 
 .card-small {
