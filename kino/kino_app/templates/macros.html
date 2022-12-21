@@ -149,27 +149,45 @@
             <h2 class="card-title">{{ review['movie_name'] }}</h2>
             <p>{{ review['review'] }}</p>
             <div class="card-actions justify-end">
-                <button class="btn btn-primary">К отзыву</button>
+                <button class="btn btn-primary" id="rev{{ review['movie_id'] }}{{ review['user_id'] }}btn">К отзыву
+                </button>
             </div>
         </div>
     </div>
 
-{#    <dialog class="popup rounded-2xl" id="login-popup">#}
-{#    <div class="w-full h-full p-0" id="popup-body">#}
-{#        <form class="flex flex-col max-w-4xl max-h-96 mx-24" method="get">#}
-{#            <div class="normal-case text-xl text-center mt-16">Login</div>#}
-{#            <div class="flex flex-col gap-4 my-7">#}
-{##}
-{#                <label>#}
-{#                    <input class="input input-bordered input-primary w-64" type="text" placeholder="Username..."/>#}
-{#                </label>#}
-{#                <label>#}
-{#                    <input class="input input-bordered input-primary w-64" type="password" placeholder="Password..."/>#}
-{#                </label>#}
-{#            </div>#}
-{##}
-{#            <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>#}
-{#        </form>#}
-{#    </div>#}
-{#</dialog>#}
+    <dialog class="popup rounded-2xl" id="rev{{ review['movie_id'] }}{{ review['user_id'] }}">
+        <div class="w-full h-full p-0" id="rev{{ review['movie_id'] }}{{ review['user_id'] }}body">
+            <form class="flex flex-col" method="get">
+                <div class="flex flex-col gap-4 my-7">
+
+                    <div class="flex flex-row self-center max-w-3xl mb-16">
+                        <img class="rounded-xl shadow-lg mx-3 self-start" src="{{ review['movie_poster_url'] }}"
+                             alt="{{ review['movie_name'] }}">
+                        <div class="flex flex-col px-5">
+                            <div class="mb-5">
+                                <h1 class="font-extrabold text-5xl mb-2">{{ review['movie_name'] }}</h1>
+                                <h2 class="flex flex-row items-baseline">
+                                    <span class="text-primary font-bold text-2xl">{{ review['user_login'] }}&nbsp</span>
+                                    <span class="text-base">{{ review['review_date'] }}</span>
+                                </h2>
+                            </div>
+                            <p class="mb-5">{{ review['review'] }}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                {#                <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>#}
+            </form>
+        </div>
+    </dialog>
+
+    <script type="text/javascript">
+        const rev{{ review['movie_id'] }}{{ review['user_id'] }}btn = document.getElementById("rev{{ review['movie_id'] }}{{ review['user_id'] }}btn");
+        rev{{ review['movie_id'] }}{{ review['user_id'] }}btn.addEventListener("click", () => rev{{ review['movie_id'] }}{{ review['user_id'] }}.showModal());
+        const rev{{ review['movie_id'] }}{{ review['user_id'] }} = document.getElementById("rev{{ review['movie_id'] }}{{ review['user_id'] }}")
+        rev{{ review['movie_id'] }}{{ review['user_id'] }}.addEventListener('click', () => rev{{ review['movie_id'] }}{{ review['user_id'] }}.close());
+        const rev{{ review['movie_id'] }}{{ review['user_id'] }}body = document.getElementById('rev{{ review['movie_id'] }}{{ review['user_id'] }}body');
+        rev{{ review['movie_id'] }}{{ review['user_id'] }}body.addEventListener('click', (event) => event.stopPropagation());
+    </script>
 {% endmacro %}

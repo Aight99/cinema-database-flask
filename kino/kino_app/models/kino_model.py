@@ -85,11 +85,12 @@ def get_movie_recent_reviews(conn, count):
              m.movie_id,
              movie_poster_url,
              user_login,
+             u.user_id,
              user_list_movie_rating,
              review,
              upvote_count,
              downvote_count,
-             review_date_unix
+             DATE(review_date_unix, 'unixepoch') as review_date
          FROM
              user_list_movie
              JOIN movie m on m.movie_id = user_list_movie.movie_id
@@ -110,11 +111,12 @@ def get_movie_reviews(conn, movie_id, count):
              movie.movie_id,
              movie_poster_url,
              user_login,
+             list.user_id,
              user_list_movie_rating,
              review,
              upvote_count,
              downvote_count,
-             review_date_unix
+             DATE(review_date_unix, 'unixepoch') as review_date
          FROM
              movie
              JOIN user_list_movie list ON movie.movie_id = list.movie_id

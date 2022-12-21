@@ -1,5 +1,7 @@
 const navbar = document.getElementById("navbar");
+
 const loginButton = document.getElementById("login");
+loginButton.addEventListener("click", () => loginPopup.showModal());
 const loginPopup = document.getElementById("login-popup")
 loginPopup.addEventListener('click', () => loginPopup.close());
 const popupBody = document.getElementById('popup-body');
@@ -20,7 +22,3 @@ window.onscroll = function () {
 function goToMovie(movie_id) {
     location.href = "/movie/" + movie_id;
 }
-
-loginButton.addEventListener("click", () => {
-  loginPopup.showModal();
-});
