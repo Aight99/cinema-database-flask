@@ -142,15 +142,34 @@
     </div>
 {% endmacro %}
 
-{% macro render_review_card(text) %}
+{% macro render_review_card(review) %}
     <div class="card card-side bg-base-100 shadow-xl w-[32rem] h-72">
-        <figure class="h-72 w-full"><img class="h-72" src="https://m.media-amazon.com/images/M/MV5BYmU5OWM5ZTAtNjUzOC00NmUyLTgyOWMtMjlkNjdlMDAzMzU1XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg" alt="Movie"/></figure>
+        <figure class="h-72 w-full"><img class="h-72" src="{{ review['movie_poster_url'] }}" alt="Movie"/></figure>
         <div class="card-body">
-            <h2 class="card-title">Я отзыв</h2>
-            <p>{{ text }}</p>
+            <h2 class="card-title">{{ review['movie_name'] }}</h2>
+            <p>{{ review['review'] }}</p>
             <div class="card-actions justify-end">
                 <button class="btn btn-primary">К отзыву</button>
             </div>
         </div>
     </div>
+
+{#    <dialog class="popup rounded-2xl" id="login-popup">#}
+{#    <div class="w-full h-full p-0" id="popup-body">#}
+{#        <form class="flex flex-col max-w-4xl max-h-96 mx-24" method="get">#}
+{#            <div class="normal-case text-xl text-center mt-16">Login</div>#}
+{#            <div class="flex flex-col gap-4 my-7">#}
+{##}
+{#                <label>#}
+{#                    <input class="input input-bordered input-primary w-64" type="text" placeholder="Username..."/>#}
+{#                </label>#}
+{#                <label>#}
+{#                    <input class="input input-bordered input-primary w-64" type="password" placeholder="Password..."/>#}
+{#                </label>#}
+{#            </div>#}
+{##}
+{#            <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</dialog>#}
 {% endmacro %}

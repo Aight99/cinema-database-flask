@@ -78,19 +78,51 @@ def get_all_movies(conn):
         ''', conn)
 
 
-def get_movie_reviews(conn, film):
+def get_movie_recent_reviews(conn, count):
     return pd.read_sql(f'''
          SELECT
              movie_name,
+             m.movie_id,
+             movie_poster_url,
              user_login,
              user_list_movie_rating,
-             review
+             review,
+             upvote_count,
+             downvote_count,
+             review_date_unix
+         FROM
+             user_list_movie
+             JOIN movie m on m.movie_id = user_list_movie.movie_id
+             JOIN user u on u.user_id = user_list_movie.user_id
+         WHERE
+             review IS NOT NULL
+         ORDER BY 
+             review_date_unix DESC 
+         LIMIT 
+             {count}
+        ''', conn)
+
+
+def get_movie_reviews(conn, movie_id, count):
+    return pd.read_sql(f'''
+         SELECT
+             movie_name,
+             movie.movie_id,
+             movie_poster_url,
+             user_login,
+             user_list_movie_rating,
+             review,
+             upvote_count,
+             downvote_count,
+             review_date_unix
          FROM
              movie
              JOIN user_list_movie list ON movie.movie_id = list.movie_id
              JOIN user ON list.user_id = user.user_id
          WHERE
-             movie.movie_name = '{film}'
+             movie.movie_id = '{movie_id}'
+         LIMIT 
+             {count}
         ''', conn)
 
 
