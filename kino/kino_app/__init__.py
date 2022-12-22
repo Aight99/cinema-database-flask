@@ -1,4 +1,8 @@
 from flask import Flask
+from flask_login import LoginManager
+from kino_app.routes.auth import User
+
+login_manager = LoginManager()
 
 
 def create_app():
@@ -9,5 +13,11 @@ def create_app():
     app.register_blueprint(main, url_prefix='/')
     from kino_app.routes.auth import auth
     app.register_blueprint(auth, url_prefix='/')
+
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User().load_from_db(user_id)
 
     return app

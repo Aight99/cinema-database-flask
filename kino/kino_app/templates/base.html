@@ -22,7 +22,10 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a id="login" class="btn btn-outline btn-primary min-h-0 h-9">Log in</a>
+        <form action="{{ url_for('auth.logout') }}" method="post">
+            <input type="submit" id="logout" class="btn btn-outline btn-primary min-h-0 h-9 mx-1" value="Log Out"/>
+        </form>
+        <a id="login" class="btn btn-primary min-h-0 h-9 mx-1">Log in</a>
     </div>
 </div>
 
@@ -33,16 +36,24 @@
 
 <dialog class="popup rounded-2xl" id="login-popup">
     <div class="w-full h-full p-0" id="popup-body">
-        <form class="flex flex-col max-w-4xl max-h-96 mx-24" method="get">
+        <form action="{{ url_for('auth.login') }}" class="flex flex-col max-w-4xl max-h-96 mx-24" method="post">
             <div class="normal-case text-xl text-center mt-16">Login</div>
             <div class="flex flex-col gap-4 my-7">
 
                 <label>
-                    <input class="input input-bordered input-primary w-64" type="text" placeholder="Username..."/>
+                    <input name="username" class="input input-bordered input-primary w-64" type="text"
+                           placeholder="Username..."/>
                 </label>
                 <label>
-                    <input class="input input-bordered input-primary w-64" type="password" placeholder="Password..."/>
+                    <input name="password" class="input input-bordered input-primary w-64" type="password"
+                           placeholder="Password..."/>
                 </label>
+                <div class="form-control">
+                    <label class="label cursor-pointer">
+                        <span class="label-text">Remember me</span>
+                        <input name="rememberme" type="checkbox" class="checkbox checkbox-primary"/>
+                    </label>
+                </div>
             </div>
 
             <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>

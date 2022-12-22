@@ -1,5 +1,6 @@
 import pandas as pd
 from flask import Blueprint, render_template
+from flask_login import login_required
 from utils import get_db_connection
 from kino_app.models.kino_model import *
 
@@ -23,6 +24,12 @@ def main_page():
         notna=pd.notna
     )
     return html
+
+
+@main.route('/test')
+@login_required
+def test():
+    return 'Yay'
 
 
 @main.route('/gallery')
