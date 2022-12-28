@@ -146,7 +146,9 @@
     <div class="card card-side bg-base-100 shadow-xl w-[32rem] h-72">
         <figure class="h-72 w-full"><img class="h-72" src="{{ review['movie_poster_url'] }}" alt="Movie"/></figure>
         <div class="card-body">
-            <h2 class="card-title">{{ review['movie_name'] }}</h2>
+            <a href="/movie/{{ review['movie_id'] }}">
+                <h2 class="card-title">{{ review['movie_name'] }}</h2>
+            </a>
             <p>{{ review['review'] }}</p>
             <div class="card-actions justify-end">
                 <button class="btn btn-primary" id="rev{{ review['movie_id'] }}{{ review['user_id'] }}btn">К отзыву
@@ -165,7 +167,9 @@
                              alt="{{ review['movie_name'] }}">
                         <div class="flex flex-col px-5">
                             <div class="mb-5">
-                                <h1 class="font-extrabold text-5xl mb-2">{{ review['movie_name'] }}</h1>
+                                <a href="/movie/{{ review['movie_id'] }}">
+                                    <h1 class="font-extrabold text-5xl mb-2">{{ review['movie_name'] }}</h1>
+                                </a>
                                 <h2 class="flex flex-row items-baseline">
                                     <span class="text-primary font-bold text-2xl">{{ review['user_login'] }}&nbsp</span>
                                     <span class="text-base">{{ review['review_date'] }}</span>
