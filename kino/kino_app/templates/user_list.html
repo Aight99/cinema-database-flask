@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} {{ current_user.login }} {% endblock %}
+
+{% block main %}
+    {#    <div class="w-full flex justify-center pt-5 flex-col">#}
+    <div class="w-full flex justify-center items-center pt-5 flex-col">
+
+        <h1 class="font-extrabold text-5xl mb-7">{{ current_user.login }} list</h1>
+
+        <div class="overflow-x-auto w-3/5">
+            <table class="table w-full">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th class="">Title</th>
+                    <th class="w-1/5">Score</th>
+                    <th class="w-1/5">Status</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                {% for i in range(len(movies)) %}
+                    <tr class="hover">
+                        <th>{{ i + 1 }}</th>
+                        <td>{{ movies.loc[i]['movie_name'] }}</td>
+                        {% if notna(movies.loc[i]['user_list_movie_rating']) %}
+                            <td>{{ movies.loc[i]['user_list_movie_rating'] }}</td>
+                        {% else %}
+                            <td> — </td>
+                        {% endif %}
+                        {% if notna(movies.loc[i]['status_name']) %}
+                            <td>{{ movies.loc[i]['status_name'] }}</td>
+                        {% else %}
+                            <td> — </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

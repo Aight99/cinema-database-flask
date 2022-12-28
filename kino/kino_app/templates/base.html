@@ -17,7 +17,11 @@
     <div class="navbar-center flex">
         <ul class="menu menu-horizontal p-0">
             <li><a href={{ url_for("main.gallery") }}>Search</a></li>
-            <li><a> My List </a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href={{ url_for("main.user_list") }}> My List </a></li>
+            {% else %}
+                <li><a> My List </a></li>
+            {% endif %}
             <li><a>Rating</a></li>
         </ul>
     </div>
@@ -69,12 +73,6 @@
     </div>
 
 </dialog>
-
-<br>
-<br>
-<br>
-<br>
-<br>
 </body>
 <script src="../static/scripts.js"></script>
 </html>

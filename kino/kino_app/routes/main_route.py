@@ -52,6 +52,24 @@ def gallery():
     return html
 
 
+@login_required
+@main.route('/list')
+def user_list():
+    conn = get_db_connection()
+
+    username = current_user.login
+    movies = get_user_list(conn, username)
+
+    html = render_template(
+        'user_list.html',
+        movies=movies,
+        len=len,
+        range=range,
+        notna=pd.notna
+    )
+    return html
+
+
 @main.route('/movie/<int:movie_id>')
 def movie_page(movie_id):
     add_visit(movie_id)
