@@ -43,7 +43,7 @@
             </div>
 
             <p class="card_apply">
-                <a class="card_link" href="#">Edit review<i class="fas fa-arrow-right"></i></a>
+                <a class="card_link" href="#"> <i class="fas fa-arrow-right"></i></a>
             </p>
         </div>
     </div>
@@ -74,24 +74,35 @@
         }
     </style>
 
-    <div id="s{{ movie['movie_id'] }}" class="card-small card-picture cursor-pointer"
-         onclick="goToMovie({{ movie['movie_id'] }})">
+    <div id="s{{ movie['movie_id'] }}" class="card-small card-picture cursor-pointer">
         <div class="hidden_info">
-            <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
-                {{ movie['movie_name'] }}
-            </h2>
+            <a href="/movie/{{ movie['movie_id'] }}">
+                <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
+                    {{ movie['movie_name'] }}
+                </h2>
+            </a>
 
-            {#            card_description #}
             <p class="card_apply">
-                <a class="card_link" href="#">
+                <label class="card_link cursor-pointer" for="ul{{ movie['movie_id'] }}">
                     {% if 'status_name' in movie.index and notna(movie['status_name']) %}
                         {{ movie['status_name'] }}
                     {% endif %}
                     {% if 'user_list_movie_rating' in movie.index and notna(movie['user_list_movie_rating']) %}
                         {{ movie['user_list_movie_rating'] }}
                     {% endif %}
-                    <i class="fas fa-arrow-right"></i></a>
+                    <i class="fas fa-arrow-right"></i></label>
             </p>
+        </div>
+    </div>
+
+    <input type="checkbox" id="ul{{ movie['movie_id'] }}" class="modal-toggle"/>
+    <div class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">{{ movie['movie_name'] }}</h3>
+            <p class="py-4">Change record for movie in your list</p>
+            <div class="modal-action">
+                <label for="ul{{ movie['movie_id'] }}" class="btn">Not Implemented Exception</label>
+            </div>
         </div>
     </div>
 {% endmacro %}
