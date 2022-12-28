@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %} KiYES {% endblock %}
+{% block title %} KinoMachine {% endblock %}
 
 {% block main %}
     <div class="flex flex-col w-full border-opacity-100">
@@ -8,20 +8,22 @@
             <img class="" src="../static/img/hp.png" alt="Гарри Поттер">
         </div>
 
-        <div class="divider font-bold text-2xl px-10">Your list</div>
-        <div class="carousel py-3 w-full">
-            {% for i in range(len(movies)) %}
-                <div class="carousel-item mx-2">
-                    {{ macros.render_small_movie(movies.loc[i], notna) }}
-                </div>
-            {% endfor %}
-        </div>
+        {% if current_user.is_authenticated %}
+            <div class="divider font-bold text-2xl px-10">Your list</div>
+            <div class="carousel py-3 w-full">
+                {% for i in range(len(movies)) %}
+                    <div class="carousel-item mx-2">
+                        {{ macros.render_small_movie(movies.loc[i], notna) }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <div class="divider font-bold text-2xl px-10">Popular today</div>
         <div class="carousel py-3 w-full">
-            {% for i in range(len(movies)) %}
+            {% for i in range(len(popular)) %}
                 <div class="carousel-item mx-2" >
-                    {{ macros.render_movie(movies.loc[i], notna) }}
+                    {{ macros.render_movie(popular.loc[i], notna) }}
                 </div>
             {% endfor %}
         </div>

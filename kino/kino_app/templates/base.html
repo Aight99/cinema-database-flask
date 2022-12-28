@@ -11,7 +11,7 @@
 <div id="navbar" class="transition-transform navbar fixed top-0 z-50 bg-base-100 md:px-20">
     <div class="navbar-start">
         <a class="btn btn-ghost normal-case text-xl px-10" href={{ url_for("main.main_page") }}>
-            KiYES
+            KinoMachine
         </a>
     </div>
     <div class="navbar-center flex">
@@ -22,10 +22,18 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <form action="{{ url_for('auth.logout') }}" method="post">
-            <input type="submit" id="logout" class="btn btn-outline btn-primary min-h-0 h-9 mx-1" value="Log Out"/>
-        </form>
-        <a id="login" class="btn btn-primary min-h-0 h-9 mx-1">Log in</a>
+        {% if current_user.is_authenticated %}
+            <div class="dropdown dropdown-hover dropdown-bottom dropdown-end">
+                <label tabindex="0" class="text-primary text-xl mx-6">{{ current_user.login }}</label>
+                <form class="dropdown-content menu p-4 shadow bg-base-100 rounded-box pt-5" tabindex="0"
+                      action="{{ url_for('auth.logout') }}" method="post">
+                    <input type="submit" id="logout" class="btn btn-outline btn-primary min-h-0 h-9 mx-1"
+                           value="Log Out"/>
+                </form>
+            </div>
+        {% else %}
+            <a id="login" class="btn btn-primary min-h-0 h-9 mx-1">Log in</a>
+        {% endif %}
     </div>
 </div>
 

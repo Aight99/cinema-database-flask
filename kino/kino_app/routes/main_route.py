@@ -1,6 +1,8 @@
 import pandas as pd
 from flask import Blueprint, render_template
-from flask_login import login_required
+from flask_login import login_required, current_user
+
+from kino_app import visit_count
 from utils import get_db_connection
 from kino_app.models.kino_model import *
 
@@ -11,14 +13,16 @@ main = Blueprint('main', __name__)
 def main_page():
     conn = get_db_connection()
 
-    username = 'qwerty'
+    username = current_user.login if current_user.is_authenticated else None
     movies = get_user_list(conn, username)
     reviews = get_movie_recent_reviews(conn, 7)
+    popular = get_popular_today(conn)
 
     html = render_template(
         'main.html',
         movies=movies,
         reviews=reviews,
+        popular=popular,
         len=len,
         range=range,
         notna=pd.notna
@@ -50,6 +54,7 @@ def gallery():
 
 @main.route('/movie/<int:movie_id>')
 def movie_page(movie_id):
+    add_visit(movie_id)
     conn = get_db_connection()
 
     movie = get_movie(conn, movie_id)
@@ -70,3 +75,10 @@ def movie_page(movie_id):
         notna=pd.notna
     )
     return html
+
+
+def add_visit(movie_id):
+    if movie_id in visit_count.keys():
+        visit_count[movie_id] += 1
+    else:
+        visit_count[movie_id] = 1

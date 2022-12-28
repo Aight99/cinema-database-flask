@@ -31,11 +31,12 @@ import pandas as pd
 #             ''', conn)
 
 
-def is_filter_empty(id_list):
-    if len(id_list) == 0:
-        return "TRUE"
-    else:
-        return "FALSE"
+# def is_filter_empty(id_list):
+#     if len(id_list) == 0:
+#         return "TRUE"
+#     else:
+#         return "FALSE"
+from kino_app import visit_count
 
 
 def get_user_list(conn, username):
@@ -132,6 +133,7 @@ def get_movie(conn, movie_id):
     return pd.read_sql(f'''
          SELECT
              movie_name,
+             movie_id,
              movie_release_year,
              movie_description,
              movie_poster_url,
@@ -172,3 +174,14 @@ def get_movie_genres(conn, movie_id):
          WHERE
              movie_id = '{movie_id}'
         ''', conn)
+
+
+def get_popular_today(conn):
+    defaults = [1745960, 6710474, 6741278, 11126994, 13706018, 3398540, 4633694, 816692, 7286456, 3718778]
+    visit_results = sorted(visit_count, key=lambda x: visit_count[x], reverse=True)
+    visit_len = len(visit_results)
+    popular_ids = visit_results[:visit_len] + defaults[visit_len:] if visit_len < 10 else visit_results[:10]
+    result = pd.DataFrame()
+    for i in popular_ids:
+        result = pd.concat([result, get_movie(conn, i)])
+    return result.reset_index()

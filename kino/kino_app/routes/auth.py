@@ -55,6 +55,8 @@ def login():
         login_user(User().create(user_data), rememberme)
     else:
         flash('Incorrect username or password')
+        # if incorrect login -> go to full login page
+        # https://flask.palletsprojects.com/en/0.12.x/patterns/flashing/
     return redirect(url_for('main.main_page'))
 
 

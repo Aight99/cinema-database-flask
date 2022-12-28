@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from kino_app.routes.auth import User
 
 login_manager = LoginManager()
+visit_count = dict()
 
 
 def create_app():
