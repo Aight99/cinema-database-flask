@@ -11,6 +11,7 @@ def get_user_list(conn, username):
              user_login,
              user_list_movie_rating,
              status_name,
+             list.status_id,
              movie_poster_url,
              movie_release_year,
              movie_type_name,
@@ -24,7 +25,7 @@ def get_user_list(conn, username):
          WHERE
              user.user_login = '{username}'
          ORDER BY
-             user_list_movie_rating DESC
+             review_date_unix DESC
         ''', conn)
 
 
@@ -34,6 +35,7 @@ def get_user_review(conn, username, movie_id):
              user_login,
              user_list_movie_rating,
              status_name,
+             list.status_id,
              list.movie_id,
              review
          FROM
@@ -109,7 +111,7 @@ def get_movie_reviews(conn, movie_id, count):
              JOIN user_list_movie list ON movie.movie_id = list.movie_id
              JOIN user ON list.user_id = user.user_id
          WHERE
-             movie.movie_id = '{movie_id}'
+             movie.movie_id = '{movie_id}' AND review IS NOT NULL
          ORDER BY
              review_date_unix DESC 
          LIMIT 
@@ -164,7 +166,7 @@ def get_movie_genres(conn, movie_id):
         ''', conn)
 
 
-def add_or_edit_review(conn, username, movie_id, status, score, review_text):
+def add_or_edit_review(conn, username, movie_id, status_id, score, review_text):
     cur = conn.cursor()
     timestamp = int(time.time())
     cur.executescript(f'''
@@ -175,11 +177,45 @@ def add_or_edit_review(conn, username, movie_id, status, score, review_text):
                 {movie_id},
                 (SELECT user_id FROM user WHERE user_login = '{username}'),
                 {score},
-                {status},
+                {status_id},
                 '{review_text}',
                 {timestamp}
             )
         ''')
+    conn.commit()
+
+
+def update_list_entry(conn, username, movie_id, status_id, score):
+    cur = conn.cursor()
+
+    cur.execute(f'''
+        SELECT u.user_id 
+        FROM user_list_movie JOIN user u on u.user_id = user_list_movie.user_id 
+        WHERE user_login = '{username}' AND movie_id = {movie_id}
+        ''')
+    user_id = cur.fetchone()[0]
+    if user_id is not None:
+        cur.execute(f'''
+            UPDATE
+                user_list_movie
+            SET
+                status_id = {status_id},
+                user_list_movie_rating = {score}
+            WHERE
+                user_id = {user_id} AND movie_id = {movie_id}
+            ''')
+    else:
+        cur.executescript(f'''
+            INSERT INTO
+                user_list_movie(movie_id, user_id, user_list_movie_rating, status_id)
+            VALUES
+                (
+                    {movie_id},
+                    {user_id},
+                    {score},
+                    {status_id}
+                )
+            ''')
     conn.commit()
 
 

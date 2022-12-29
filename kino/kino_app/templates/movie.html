@@ -88,22 +88,26 @@
     <input type="checkbox" id="edit-review" class="modal-toggle"/>
     <div class="modal">
         {% if user_review is not none %}
-            <form class="modal-box" action="{{ url_for("main.add_review") }}" method="post">
+            <form class="modal-box" action="{{ url_for("main.edit_or_add_review") }}" method="post">
                 <input type="hidden" name="movie_id" value="{{ movie['movie_id'] }}">
                 <h3 class="font-bold text-lg">Edit Review</h3>
                 <div class="flex flex-col">
                     <select name="status" class="select w-40 mt-3 mb-1">
-                        <option value="0">Completed</option>
-                        <option value="1">Watching</option>
-                        <option value="2">Plan to Watch</option>
-                        <option value="3">Dropped</option>
+                        <option {% if user_review['status_id'] == 0 %} selected {% endif %} value="0">Completed
+                        </option>
+                        <option {% if user_review['status_id'] == 1 %} selected {% endif %} value="1">Watching
+                        </option>
+                        <option  {% if user_review['status_id'] == 2 %} selected {% endif %} value="2">Plan to Watch
+                        </option>
+                        <option  {% if user_review['status_id'] == 3 %} selected {% endif %} value="3">Dropped
+                        </option>
                     </select>
                     <div class="px-3">
                         {{ macros.render_rating(user_review['user_list_movie_rating']) }}
                     </div>
                     <label>
                     <textarea name="text" class="textarea textarea-warning w-full h-52"
-                              placeholder="Describe your impressions..."></textarea>
+                              placeholder="Describe your impressions...">{{ user_review['review'] }}</textarea>
                     </label>
                 </div>
                 <div class="flex flex-row modal-action">
@@ -112,15 +116,15 @@
                 </div>
             </form>
         {% else %}
-            <form class="modal-box" action="{{ url_for("main.add_review") }}" method="post">
+            <form class="modal-box" action="{{ url_for("main.edit_or_add_review") }}" method="post">
                 <input type="hidden" name="movie_id" value="{{ movie['movie_id'] }}">
                 <h3 class="font-bold text-lg">Add Review</h3>
                 <div class="flex flex-col">
                     <select name="status" class="select w-40 mt-3 mb-1">
-                        <option value="0">Completed</option>
-                        <option value="1">Watching</option>
-                        <option value="2">Plan to Watch</option>
-                        <option value="3">Dropped</option>
+                        <option value="0">Completed </option>
+                        <option value="1">Watching </option>
+                        <option value="2">Plan to Watch </option>
+                        <option value="3">Dropped </option>
                     </select>
                     <div class="px-3">
                         {{ macros.render_rating(0) }}

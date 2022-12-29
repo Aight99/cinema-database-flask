@@ -30,12 +30,6 @@ def main_page():
     return html
 
 
-@main.route('/test')
-@login_required
-def test():
-    return 'Yay'
-
-
 @main.route('/gallery')
 def gallery():
     conn = get_db_connection()
@@ -72,15 +66,20 @@ def user_list():
 
 @login_required
 @main.route('/add/review', methods=['POST'])
-def add_review():
+def edit_or_add_review():
     conn = get_db_connection()
 
     username = current_user.login
     movie_id = request.form.get('movie_id')
     score = request.form.get('rating-10')
-    status = request.form.get('status')
+    status_id = request.form.get('status')
     text = request.form.get('text')
-    add_or_edit_review(conn, username, movie_id, status, score, text)
+    old_text = get_user_review(conn, username, movie_id)['review']
+
+    if text is None or text == old_text:
+        update_list_entry(conn, username, movie_id, status_id, score)
+    else:
+        add_or_edit_review(conn, username, movie_id, status_id, score, text)
 
     return redirect(request.referrer)
 
