@@ -107,6 +107,50 @@
     </div>
 {% endmacro %}
 
+{% macro render_rating(star) %}
+    <div class="rating rating-md rating-half mb-5">
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 1 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 2 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 3 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 4 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 5 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 6 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 7 %}
+               checked
+                {% endif %}>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 8 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-1"
+                {% if star == 9 %}
+               checked
+                {% endif %}/>
+        <input type="radio" name="rating-10" class="bg-primary mask mask-star-2 mask-half-2"
+                {% if star == 10 %}
+               checked
+                {% endif %}/>
+    </div>
+{% endmacro %}
 
 {% macro render_disable_rating(star) %}
     <div class="rating rating-md rating-half mb-5">

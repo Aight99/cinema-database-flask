@@ -58,10 +58,27 @@
             </div>
         </div>
 
-        <div class="divider font-bold text-2xl px-10">Latest reviews</div>
-        <div class="carousel py-3 w-full">
+        <div class="flex flex-col self-center max-w-3xl mb-16">
+            {% if current_user.is_authenticated %}
+                <div class="divider font-bold text-2xl px-10">Your review</div>
+                {% if user_review is not none %}
+                    <div class="flex flex-row mt-2">
+                        <div class="font-bold text-xl mx-3">
+                            {{ user_review['status_name'] }}
+                        </div>
+                        {{ macros.render_disable_rating(user_review['user_list_movie_rating']) }}
+                    </div>
+                    <p class="mb-5">
+                        {{ user_review['review'] }}
+                    </p>
+                    <div class="btn btn-outline btn-primary">Edit</div>
+                {% else %}
+                    <div class="btn btn-outline btn-primary">Add</div>
+                {% endif %}
+            {% endif %}
+            <div class="divider font-bold text-2xl px-10 mt-7">Latest reviews</div>
             {% for i in range(len(reviews)) %}
-                <div class="carousel-item mx-2" >
+                <div class="mx-2 my-3">
                     {{ macros.render_review_card(reviews.loc[i]) }}
                 </div>
             {% endfor %}

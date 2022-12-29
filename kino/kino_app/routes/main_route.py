@@ -75,12 +75,14 @@ def movie_page(movie_id):
     add_visit(movie_id)
     conn = get_db_connection()
 
+    username = current_user.login if current_user.is_authenticated else None
     movie = get_movie(conn, movie_id)
     genres = get_movie_genres(conn, movie_id)
     crew = get_movie_crew(conn, movie_id)
     crew_by_roles = {role: [(person_id, person_name) for i, person_name, r, person_id in crew.itertuples() if r == role]
                      for role in list(crew['crew_role_name'])}
     reviews = get_movie_reviews(conn, movie_id, 7)
+    user_review = get_user_review(conn, username, movie_id)
 
     html = render_template(
         'movie.html',
@@ -88,9 +90,11 @@ def movie_page(movie_id):
         genres=genres,
         crew=crew_by_roles,
         reviews=reviews,
+        user_review=user_review,
         len=len,
         range=range,
-        notna=pd.notna
+        notna=pd.notna,
+        none=None
     )
     return html
 
