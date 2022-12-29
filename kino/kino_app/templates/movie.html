@@ -78,8 +78,8 @@
             {% endif %}
             <div class="divider font-bold text-2xl px-10 mt-7">Latest reviews</div>
             {% for i in range(len(reviews)) %}
-                <div class="mx-2 my-3">
-                    {{ macros.render_review_card(reviews.loc[i]) }}
+                <div class="mx-2 my-3 self-center">
+                    {{ macros.render_small_review_card(len, reviews.loc[i]) }}
                 </div>
             {% endfor %}
         </div>

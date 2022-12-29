@@ -32,7 +32,7 @@
         <div class="carousel py-3 w-full">
             {% for i in range(len(reviews)) %}
                 <div class="carousel-item mx-2" >
-                    {{ macros.render_review_card(reviews.loc[i]) }}
+                    {{ macros.render_review_card(len, reviews.loc[i]) }}
                 </div>
             {% endfor %}
         </div>
