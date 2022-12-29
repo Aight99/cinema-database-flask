@@ -71,9 +71,9 @@
                     <p class="mb-5">
                         {{ user_review['review'] }}
                     </p>
-                    <div class="btn btn-outline btn-primary">Edit</div>
+                    <label for="edit-review" class="btn btn-outline btn-primary">Edit</label>
                 {% else %}
-                    <div class="btn btn-outline btn-primary">Add</div>
+                    <label for="edit-review" class="btn btn-outline btn-primary">Add</label>
                 {% endif %}
             {% endif %}
             <div class="divider font-bold text-2xl px-10 mt-7">Latest reviews</div>
@@ -85,5 +85,57 @@
         </div>
     </div>
 
+    <input type="checkbox" id="edit-review" class="modal-toggle"/>
+    <div class="modal">
+        {% if user_review is not none %}
+            <form class="modal-box" action="{{ url_for("main.add_review") }}" method="post">
+                <input type="hidden" name="movie_id" value="{{ movie['movie_id'] }}">
+                <h3 class="font-bold text-lg">Edit Review</h3>
+                <div class="flex flex-col">
+                    <select name="status" class="select w-40 mt-3 mb-1">
+                        <option value="0">Completed</option>
+                        <option value="1">Watching</option>
+                        <option value="2">Plan to Watch</option>
+                        <option value="3">Dropped</option>
+                    </select>
+                    <div class="px-3">
+                        {{ macros.render_rating(user_review['user_list_movie_rating']) }}
+                    </div>
+                    <label>
+                    <textarea name="text" class="textarea textarea-warning w-full h-52"
+                              placeholder="Describe your impressions..."></textarea>
+                    </label>
+                </div>
+                <div class="flex flex-row modal-action">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                    <label for="edit-review" class="btn btn-outline btn-primary">Cancel</label>
+                </div>
+            </form>
+        {% else %}
+            <form class="modal-box" action="{{ url_for("main.add_review") }}" method="post">
+                <input type="hidden" name="movie_id" value="{{ movie['movie_id'] }}">
+                <h3 class="font-bold text-lg">Add Review</h3>
+                <div class="flex flex-col">
+                    <select name="status" class="select w-40 mt-3 mb-1">
+                        <option value="0">Completed</option>
+                        <option value="1">Watching</option>
+                        <option value="2">Plan to Watch</option>
+                        <option value="3">Dropped</option>
+                    </select>
+                    <div class="px-3">
+                        {{ macros.render_rating(0) }}
+                    </div>
+                    <label>
+                    <textarea name="text" class="textarea textarea-warning w-full h-52"
+                              placeholder="Describe your impressions..."></textarea>
+                    </label>
+                </div>
+                <div class="flex flex-row modal-action">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                    <label for="edit-review" class="btn btn-outline btn-primary">Cancel</label>
+                </div>
+            </form>
+        {% endif %}
+    </div>
 
 {% endblock %}

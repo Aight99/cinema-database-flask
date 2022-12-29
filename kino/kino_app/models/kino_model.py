@@ -1,3 +1,5 @@
+import time
+
 import pandas as pd
 from kino_app import visit_count
 
@@ -160,6 +162,25 @@ def get_movie_genres(conn, movie_id):
          WHERE
              movie_id = '{movie_id}'
         ''', conn)
+
+
+def add_or_edit_review(conn, username, movie_id, status, score, review_text):
+    cur = conn.cursor()
+    timestamp = int(time.time())
+    cur.executescript(f'''
+        INSERT OR REPLACE INTO 
+            user_list_movie(movie_id, user_id, user_list_movie_rating, status_id, review, review_date_unix)
+        VALUES 
+            (
+                {movie_id},
+                (SELECT user_id FROM user WHERE user_login = '{username}'),
+                {score},
+                {status},
+                '{review_text}',
+                {timestamp}
+            )
+        ''')
+    conn.commit()
 
 
 def get_popular_today(conn):

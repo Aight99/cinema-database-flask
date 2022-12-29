@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 
 from kino_app import visit_count
@@ -68,6 +68,21 @@ def user_list():
         notna=pd.notna
     )
     return html
+
+
+@login_required
+@main.route('/add/review', methods=['POST'])
+def add_review():
+    conn = get_db_connection()
+
+    username = current_user.login
+    movie_id = request.form.get('movie_id')
+    score = request.form.get('rating-10')
+    status = request.form.get('status')
+    text = request.form.get('text')
+    add_or_edit_review(conn, username, movie_id, status, score, text)
+
+    return redirect(request.referrer)
 
 
 @main.route('/movie/<int:movie_id>')
