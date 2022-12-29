@@ -52,7 +52,7 @@ def user_list():
     conn = get_db_connection()
 
     username = current_user.login
-    movies = get_user_list(conn, username)
+    movies = get_user_list(conn, username, True)
 
     html = render_template(
         'user_list.html',

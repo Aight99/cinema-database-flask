@@ -97,7 +97,7 @@
 
     <input type="checkbox" id="ul{{ movie['movie_id'] }}" class="modal-toggle"/>
     <div class="modal">
-        <form class="modal-box" action="{{ url_for("main.edit_or_add_review") }}" method="post">
+        <form class="modal-box w-64" action="{{ url_for("main.edit_or_add_review") }}" method="post">
             <input type="hidden" name="movie_id" value="{{ movie['movie_id'] }}">
             <h3 class="font-bold text-lg">{{ movie['movie_name'] }}</h3>
             <div class="flex flex-col">

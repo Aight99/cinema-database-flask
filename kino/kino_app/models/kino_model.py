@@ -4,7 +4,8 @@ import pandas as pd
 from kino_app import visit_count
 
 
-def get_user_list(conn, username):
+def get_user_list(conn, username, sort_by_score=False):
+    sorting_param = "user_list_movie_rating" if sort_by_score else "review_date_unix"
     return pd.read_sql(f'''
          SELECT
              movie_name,
@@ -25,7 +26,7 @@ def get_user_list(conn, username):
          WHERE
              user.user_login = '{username}'
          ORDER BY
-             review_date_unix DESC
+             {sorting_param} DESC
         ''', conn)
 
 

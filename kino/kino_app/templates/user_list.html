@@ -24,16 +24,32 @@
                 {% for i in range(len(movies)) %}
                     <tr class="hover">
                         <th>{{ i + 1 }}</th>
-                        <td>{{ movies.loc[i]['movie_name'] }}</td>
+                        <td><a href="/movie/{{ movies.loc[i]['movie_id'] }}">{{ movies.loc[i]['movie_name'] }}</a></td>
                         {% if notna(movies.loc[i]['user_list_movie_rating']) %}
-                            <td>{{ movies.loc[i]['user_list_movie_rating'] }}</td>
+                            <td>
+                                <label class="card_link cursor-pointer" for="ul{{ movies.loc[i]['movie_id'] }}">
+                                    {{ movies.loc[i]['user_list_movie_rating'] }}
+                                </label>
+                            </td>
                         {% else %}
-                            <td> — </td>
+                            <td>
+                                <label class="cursor-pointer" for="ul{{ movies.loc[i]['movie_id'] }}">
+                                    —
+                                </label>
+                            </td>
                         {% endif %}
                         {% if notna(movies.loc[i]['status_name']) %}
-                            <td>{{ movies.loc[i]['status_name'] }}</td>
+                            <td>
+                                <label class="card_link cursor-pointer" for="ul{{ movies.loc[i]['movie_id'] }}">
+                                    {{ movies.loc[i]['status_name'] }}
+                                </label>
+                            </td>
                         {% else %}
-                            <td> — </td>
+                            <td>
+                                <label class="cursor-pointer" for="ul{{ movies.loc[i]['movie_id'] }}">
+                                    —
+                                </label>
+                            </td>
                         {% endif %}
                     </tr>
                 {% endfor %}
@@ -41,9 +57,40 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
 
+    {% for i in range(len(movies)) %}
+        <input type="checkbox" id="ul{{ movies.loc[i]['movie_id'] }}" class="modal-toggle"/>
+        <div class="modal">
+            <form class="modal-box w-64" action="{{ url_for("main.edit_or_add_review") }}" method="post">
+                <input type="hidden" name="movie_id" value="{{ movies.loc[i]['movie_id'] }}">
+                <h3 class="font-bold text-lg">{{ movies.loc[i]['movie_name'] }}</h3>
+                <div class="flex flex-col">
+                    <select name="status" class="select w-40 mt-3 mb-1">
+                        <option {% if movies.loc[i]['status_id'] == 0 %} selected {% endif %} value="0">
+                            Completed
+                        </option>
+                        <option {% if movies.loc[i]['status_id'] == 1 %} selected {% endif %} value="1">
+                            Watching
+                        </option>
+                        <option {% if movies.loc[i]['status_id'] == 2 %} selected {% endif %} value="2">
+                            Plan to Watch
+                        </option>
+                        <option {% if movies.loc[i]['status_id'] == 3 %} selected {% endif %} value="3">
+                            Dropped
+                        </option>
+                    </select>
+                    <div class="px-3">
+                        {{ macros.render_rating(movies.loc[i]['user_list_movie_rating']) }}
+                    </div>
+                </div>
+                <div class="flex flex-row modal-action">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                    <label for="ul{{ movies.loc[i]['movie_id'] }}"
+                           class="btn btn-outline btn-primary">Cancel</label>
+                </div>
+            </form>
+        </div>
+    {% endfor %}
 
 {% endblock %}
