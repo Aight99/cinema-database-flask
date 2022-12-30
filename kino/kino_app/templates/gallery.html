@@ -3,9 +3,33 @@
 {% block title %} Gallery {% endblock %}
 
 {% block main %}
-    <div class="flex flex-wrap justify-around pt-4">
-        {% for i in range(len(movies)) %}
-            {{ macros.render_movie(movies.loc[i], notna) }}
-        {% endfor %}
+    <div class="flex flex-col w-full">
+        <form action="{{ url_for("main.gallery") }}" method="get" class="flex flex-row rounded-xl w-fit self-center mt-4 bg-base-100 p-2 gap-4">
+
+            <input name="search_query" type="text" placeholder="Title, person or description..."
+                   class="input input-bordered input-primary w-96" value="{{ search_query }}"/>
+
+            <select name="genre_select" class="select select-primary w-36">
+                <option {% if int(selected_genre) == -1 %} selected {% endif %} value="-1">
+                        Any genre
+                </option>
+                {% for i in range(len(genres)) %}
+                    <option {% if i == int(selected_genre) %} selected {% endif %} value="{{ i }}">
+                        {{ genres.loc[i]['genre_name'] }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <input class="btn btn-outline btn-primary self-end" type="submit" value="Search">
+        </form>
+
+        <div class="flex flex-wrap justify-around pt-4 w-fit">
+            {% for i in range(len(movies)) %}
+                <div class="mx-2">
+                    {{ macros.render_movie(movies.loc[i], notna) }}
+                </div>
+            {% endfor %}
+        </div>
     </div>
+
 {% endblock %}

@@ -68,6 +68,38 @@ def get_all_movies(conn):
         ''', conn)
 
 
+def get_filtered_movies(conn, query_string, genre_id):
+    genre_skip = "TRUE" if int(genre_id) == -1 else "FALSE"
+    return pd.read_sql(f'''
+         WITH movies_with_genre AS (
+             SELECT movie_id
+             FROM movie_genre
+             WHERE genre_id = {genre_id}
+         ), movies_with_person AS (
+             SELECT movie_id
+             FROM crew_member JOIN person p on p.person_id = crew_member.person_id
+             GROUP BY movie_id
+             HAVING group_concat(person_name) LIKE '%{query_string}%'
+         )
+         SELECT
+             movie_name,
+             movie_poster_url,
+             movie_release_year,
+             movie_id,
+             movie_type_name
+         FROM
+             movie
+             JOIN movie_type mt on movie.movie_type_id = mt.movie_type_id
+         WHERE
+             (movie_name LIKE '%{query_string}%' OR 
+              movie_description LIKE '%{query_string}%' OR 
+              movie_id in movies_with_person)
+             AND (movie_id in movies_with_genre OR {genre_skip})
+         ORDER BY 
+             movie_release_year DESC 
+        ''', conn)
+
+
 def get_movie_recent_reviews(conn, count):
     return pd.read_sql(f'''
          SELECT
@@ -164,6 +196,17 @@ def get_movie_genres(conn, movie_id):
              JOIN genre g on movie_genre.genre_id = g.genre_id
          WHERE
              movie_id = '{movie_id}'
+        ''', conn)
+
+
+def get_genres(conn):
+    return pd.read_sql(f'''
+         SELECT
+             genre_name
+         FROM
+             genre
+         ORDER BY 
+             genre_id
         ''', conn)
 
 

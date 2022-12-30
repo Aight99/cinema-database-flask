@@ -28,19 +28,19 @@
     <div id="m{{ movie['movie_id'] }}" class="my-card card-picture cursor-pointer"
          onclick="goToMovie({{ movie['movie_id'] }})">
         <div class="hidden_info">
-            <h2 class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
+            <a href="/movie/{{ movie['movie_id'] }}" class="font-bold leading-10 text-gray-100 text-4xl text-center mb-2 mx-6">
                 {{ movie['movie_name'] }}
-            </h2>
-            <h2 class="font-bold text-lg">{{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }}</h2>
+            </a>
+            <a href="/movie/{{ movie['movie_id'] }}" class="font-bold text-lg">{{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }}</a>
 
-            <div class="card_description">
+            <a href="/movie/{{ movie['movie_id'] }}" class="card_description">
                 {% if 'status_name' in movie.index and notna(movie['status_name']) %}
                     <p>{{ movie['status_name'] }}
                 {% endif %}
                 {% if 'user_list_movie_rating' in movie.index and notna(movie['user_list_movie_rating']) %}
                     {{ movie['user_list_movie_rating'] }}  </p>
                 {% endif %}
-            </div>
+            </a>
 
             <p class="card_apply">
                 <a class="card_link" href="#"> <i class="fas fa-arrow-right"></i></a>

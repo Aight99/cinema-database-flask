@@ -33,14 +33,23 @@ def main_page():
 @main.route('/gallery')
 def gallery():
     conn = get_db_connection()
+    search_query = request.args.get('search_query')
+    search_query = search_query.strip() if search_query is not None else ""
+    selected_genre = request.args.get('genre_select')
+    selected_genre = selected_genre if selected_genre is not None else -1
 
-    movies = get_all_movies(conn)
+    movies = get_filtered_movies(conn, search_query, selected_genre)
+    genres = get_genres(conn)
 
     html = render_template(
         'gallery.html',
         movies=movies,
+        genres=genres,
+        search_query=search_query,
+        selected_genre=selected_genre,
         len=len,
         range=range,
+        int=int,
         notna=pd.notna
     )
     return html
