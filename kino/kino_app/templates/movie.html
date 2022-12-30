@@ -14,7 +14,7 @@
                         ({{ movie['movie_type_name'] }} {{ movie['movie_release_year'] }})</h2>
                 </div>
                 {% if notna(movie['movie_rating']) %}
-                    {{ macros.render_disable_rating(movie['movie_rating'] // 1) }}
+                    {{ macros.render_disable_rating(movie['movie_rating'] // 1, 'rating-calculated') }}
                 {% endif %}
 
                 <p class="mb-5">{{ movie['movie_description'] }}</p>

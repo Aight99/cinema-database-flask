@@ -81,6 +81,8 @@ def edit_or_add_review():
     else:
         add_or_edit_review(conn, username, movie_id, status_id, score, text)
 
+    update_movies_rating(conn)
+
     return redirect(request.referrer)
 
 

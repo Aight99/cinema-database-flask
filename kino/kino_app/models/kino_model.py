@@ -220,6 +220,31 @@ def update_list_entry(conn, username, movie_id, status_id, score):
     conn.commit()
 
 
+def update_movies_rating(conn):
+    cur = conn.cursor()
+    cur.execute(f'''
+     WITH rating AS (
+         SELECT
+            movie.movie_id AS id,
+            avg(list.user_list_movie_rating) AS score
+         FROM
+            movie
+            JOIN user_list_movie list ON movie.movie_id = list.movie_id
+         GROUP BY
+            movie.movie_id
+     )
+     UPDATE
+        movie
+     SET
+        movie_rating = rating.score
+     FROM
+        rating
+     WHERE
+        rating.id = movie.movie_id
+    ''')
+    conn.commit()
+
+
 def get_popular_today(conn):
     defaults = [1745960, 6710474, 6741278, 11126994, 13706018, 3398540, 4633694, 816692, 7286456, 3718778]
     visit_results = sorted(visit_count, key=lambda x: visit_count[x], reverse=True)
