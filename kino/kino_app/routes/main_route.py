@@ -83,7 +83,9 @@ def edit_or_add_review():
     score = request.form.get('rating-10')
     status_id = request.form.get('status')
     text = request.form.get('text')
-    old_text = get_user_review(conn, username, movie_id)['review']
+    text = text if len(text) > 0 else None
+    old_review = get_user_review(conn, username, movie_id)
+    old_text = old_review['review'] if old_review is not None else None
 
     if text is None or text == old_text:
         update_list_entry(conn, username, movie_id, status_id, score)

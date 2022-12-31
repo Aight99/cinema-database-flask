@@ -69,19 +69,23 @@
                         {{ macros.render_disable_rating(user_review['user_list_movie_rating']) }}
                     </div>
                     <p class="mb-5">
-                        {{ user_review['review'] }}
+                        {% if user_review['review'] != none %}
+                            {{ user_review['review'] }}
+                        {% endif %}
                     </p>
                     <label for="edit-review" class="btn btn-outline btn-primary">Edit</label>
                 {% else %}
                     <label for="edit-review" class="btn btn-outline btn-primary">Add</label>
                 {% endif %}
             {% endif %}
-            <div class="divider font-bold text-2xl px-10 mt-7">Latest reviews</div>
-            {% for i in range(len(reviews)) %}
-                <div class="mx-2 my-3 self-center">
-                    {{ macros.render_small_review_card(len, reviews.loc[i]) }}
-                </div>
-            {% endfor %}
+            {% if len(reviews) > 0 %}
+                <div class="divider font-bold text-2xl px-10 mt-7">Latest reviews</div>
+                {% for i in range(len(reviews)) %}
+                    <div class="mx-2 my-3 self-center">
+                        {{ macros.render_small_review_card(len, reviews.loc[i]) }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 
@@ -106,8 +110,13 @@
                         {{ macros.render_rating(user_review['user_list_movie_rating']) }}
                     </div>
                     <label>
-                    <textarea name="text" class="textarea textarea-warning w-full h-52"
-                              placeholder="Describe your impressions...">{{ user_review['review'] }}</textarea>
+                        {% if user_review['review'] != none %}
+                            {% set old_text = user_review['review'] %}
+                        {% else %}
+                            {% set old_text = "" %}
+                        {% endif %}
+                        <textarea name="text" class="textarea textarea-warning w-full h-52"
+                                  placeholder="Describe your impressions...">{{ old_text }}</textarea>
                     </label>
                 </div>
                 <div class="flex flex-row modal-action">
@@ -121,10 +130,10 @@
                 <h3 class="font-bold text-lg">Add Review</h3>
                 <div class="flex flex-col">
                     <select name="status" class="select w-40 mt-3 mb-1">
-                        <option value="0">Completed </option>
-                        <option value="1">Watching </option>
-                        <option value="2">Plan to Watch </option>
-                        <option value="3">Dropped </option>
+                        <option value="0">Completed</option>
+                        <option value="1">Watching</option>
+                        <option value="2">Plan to Watch</option>
+                        <option value="3">Dropped</option>
                     </select>
                     <div class="px-3">
                         {{ macros.render_rating(0) }}

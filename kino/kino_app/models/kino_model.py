@@ -237,7 +237,9 @@ def update_list_entry(conn, username, movie_id, status_id, score):
         FROM user_list_movie JOIN user u on u.user_id = user_list_movie.user_id 
         WHERE user_login = '{username}' AND movie_id = {movie_id}
         ''')
-    user_id = cur.fetchone()[0]
+    user_id = cur.fetchone()
+    user_id = user_id[0] if user_id else None
+    score = score if score else 10
     if user_id is not None:
         cur.execute(f'''
             UPDATE
@@ -255,7 +257,7 @@ def update_list_entry(conn, username, movie_id, status_id, score):
             VALUES
                 (
                     {movie_id},
-                    {user_id},
+                    (SELECT user_id FROM user WHERE user_login = '{username}'),
                     {score},
                     {status_id}
                 )
