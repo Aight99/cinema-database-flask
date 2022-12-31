@@ -2,7 +2,7 @@ from time import time
 import pandas as pd
 
 
-def add_user(conn, user_login, user_password):
+def try_create_user(conn, user_login, user_password):
     registration_date = int(time())
     conn.execute(f'''
          INSERT INTO

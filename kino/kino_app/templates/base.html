@@ -37,7 +37,8 @@
                 </form>
             </div>
         {% else %}
-            <a id="login" class="btn btn-primary min-h-0 h-9 mx-1">Log in</a>
+            <a id="signup" class="btn btn-outline btn-primary min-h-0 h-9 mx-1">Sign Up</a>
+            <a id="login" class="btn btn-primary min-h-0 h-9 mx-1">Log In</a>
         {% endif %}
     </div>
 </div>
@@ -50,7 +51,7 @@
 <dialog class="popup rounded-2xl" id="login-popup">
     <div class="w-full h-full p-0" id="popup-body">
         <form action="{{ url_for('auth.login') }}" class="flex flex-col max-w-4xl max-h-96 mx-24" method="post">
-            <div class="normal-case text-xl text-center mt-16">Login</div>
+            <div class="normal-case text-xl text-center mt-16">Enter account</div>
             <div class="flex flex-col gap-4 my-7">
 
                 <label>
@@ -70,6 +71,31 @@
             </div>
 
             <button class="btn btn-wide mb-2 mb-16" type="submit">Login</button>
+        </form>
+    </div>
+
+</dialog>
+<dialog class="popup rounded-2xl" id="signup-popup">
+    <div class="w-full h-full p-0" id="signup-popup-body">
+        <form action="{{ url_for('auth.signup') }}" class="flex flex-col max-w-4xl max-h-96 mx-24" method="post">
+            <div class="normal-case text-xl text-center mt-16">Create account</div>
+            <div class="flex flex-col gap-4 my-7">
+
+                <label>
+                    <input name="username" class="input input-bordered input-primary w-64" type="text"
+                           placeholder="Username..."/>
+                </label>
+                <label>
+                    <input name="password" class="input input-bordered input-primary w-64" type="password"
+                           placeholder="Password..."/>
+                </label>
+                <label>
+                    <input name="password_again" class="input input-bordered input-primary w-64" type="password"
+                           placeholder="Password again..."/>
+                </label>
+            </div>
+
+            <button class="btn btn-wide mb-2 mb-16" type="submit">Join the site!</button>
         </form>
     </div>
 

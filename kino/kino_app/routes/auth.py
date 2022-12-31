@@ -57,7 +57,7 @@ def login():
         flash('Incorrect username or password')
         # if incorrect login -> go to full login page
         # https://flask.palletsprojects.com/en/0.12.x/patterns/flashing/
-    return redirect(url_for('main.main_page'))
+    return redirect(request.referrer)
 
 
 @auth.route('/logout', methods=['POST'])
@@ -67,9 +67,15 @@ def logout():
 
 
 @auth.route('/signup', methods=['POST'])
-def sign_up():
-    name = request.form.get('username')
+def signup():
+    conn = get_db_connection()
+    username = request.form.get('username')
     password = request.form.get('password')
     password_again = request.form.get('password_again')
-    raise NotImplemented
-    # return redirect(url_for('main_page'))
+    if password != password_again or len(password) == 0:
+        return redirect(request.referrer)
+    try_create_user(conn, username, password)
+    user_data = try_get_user_data(conn, username, password)
+    if user_data is not None:
+        login_user(User().create(user_data), True)
+    return redirect(request.referrer)
